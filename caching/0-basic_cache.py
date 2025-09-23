@@ -3,7 +3,7 @@
 BasicCache module defines a basic caching system.
 """
 
-from BasicCache import BaseCaching
+from BaseCaching import BaseCaching
 
 class BasicCache(BaseCaching):
     """
@@ -18,7 +18,7 @@ class BasicCache(BaseCaching):
         super().__init__()
         self.cache_data: dict[str, any] = {}
 
-    def put(self, key: str, item: any) -> None:
+    def put(self, key, item):
         """
         Add an item to the cache. If the cache exceeds its limit, removes the oldest item.
         Args:
