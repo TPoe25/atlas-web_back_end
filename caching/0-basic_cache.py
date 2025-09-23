@@ -3,7 +3,7 @@
 BasicCache module defines a basic caching system.
 """
 
-from BaseCaching import BaseCaching
+from BasicCache import BaseCaching
 
 class BasicCache(BaseCaching):
     """
