@@ -14,7 +14,11 @@ class BasicCache(BaseCaching):
         get(key):
             Retrieves an item from the cache
     """
-    def put(self, key, item):
+    def __init__(self):
+        super().__init__()
+        self.cache_data: dict[str, any] = {}
+
+    def put(self, key: str, item: any) -> None:
         """
         Add an item to the cache. If the cache exceeds its limit, removes the oldest item.
         Args:
@@ -24,7 +28,8 @@ class BasicCache(BaseCaching):
         if key is None or item is None:
             return
         self.cache_data[key] = item
-    def get(self, key):
+
+    def get(self, key: str) -> any:
         """
         Retrieves an item from the cache by its key.
 
