@@ -3,7 +3,7 @@
 simple pagination example
 """
 
-
+import csv
 from typing import Tuple
 
 
@@ -54,7 +54,7 @@ class Server:
             page_size (int): The number of items per page.
 
         Returns:
-            list: A list of rows corresponding to the given page and page size.
+            list: requested page.
         """
         assert isinstance(page, int) and page > 0, "Page must be a positive integer."
         assert isinstance(page_size, int) and page_size > 0, "Page size must be a positive integer."
