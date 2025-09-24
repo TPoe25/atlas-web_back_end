@@ -19,6 +19,7 @@ class FIFOCache(BaseCaching):
         self.cache_data: dict[str, Any] = {}
         self.queue: list[str] = []
         self.queue = []
+
     def put(self, key, item):
         """
         Adds an item to the cache with the specified key.
@@ -53,7 +54,7 @@ class FIFOCache(BaseCaching):
             key (str): The key of the item to retrieve.
 
         Returns:
-            Any: The value associated with the key, or None if the key is not found in the cache.
+            Any: value associated w/ key, or None if not found in the cache.
         """
         if key is None or key not in self.cache_data:
             return None
