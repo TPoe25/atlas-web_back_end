@@ -3,7 +3,7 @@
 LRUCache module defines a caching system
 """
 
-from caching.base_caching import BaseCaching
+from base_caching import BaseCaching
 
 class LRUCache(BaseCaching):
     """

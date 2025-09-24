@@ -4,7 +4,7 @@ Defines a Most Recently Used (MRU) caching system.
 """
 
 
-from caching.base_caching import BaseCaching
+from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
