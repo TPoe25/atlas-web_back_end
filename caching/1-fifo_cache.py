@@ -4,7 +4,7 @@ FIFO Cache module defines a caching system that removes the oldest item
 """
 
 from typing import Any
-from basecaching import BaseCaching
+from caching.base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
