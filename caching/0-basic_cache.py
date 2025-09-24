@@ -5,6 +5,7 @@ BasicCache module defines a basic caching system.
 
 from base_caching import BaseCaching
 
+
 class BasicCache(BaseCaching):
     """
     BasicCache class that inherits from BaseCaching.
@@ -20,7 +21,7 @@ class BasicCache(BaseCaching):
 
     def put(self, key, item):
         """
-        Add an item to the cache. If the cache exceeds its limit, removes the oldest item.
+        Add  item to the cache removes oldest item.
         Args:
             key (str): The key for the item.
             item (any): The item to be cached.
