@@ -3,7 +3,7 @@
 Route module for the API
 """
 from flask import Flask, jsonify
-from api.v1.views import app_views
+from Basic_authentication.api.v1.views import app_views
 from os import getenv
 from flask_cors import CORS
 
