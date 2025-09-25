@@ -14,35 +14,32 @@ class Auth:
         """
         Determines if a path requires authentication.
 
-        Args:
-            path (str): The request path.
-            excluded_paths (List[str]): List of paths excluded from auth.
+        Returns True if:
+        - path is None
+        - excluded_paths is None or empty
+        - path is NOT in excluded_paths (slash tolerant)
 
-        Returns:
-            bool: False by default
+        Otherwise, returns False.
         """
-        return False
+        if path is None:
+            return True
+
+        if not excluded_paths:
+            return True
+
+        # Ensure trailing slash on path for slash-tolerant comparison
+        if not path.endswith('/'):
+            path += '/'
+
+        for excluded in excluded_paths:
+            if excluded == path:
+                return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
-        """
-        Returns the value of the Authorization header.
-
-        Args:
-            request: Flask request object.
-
-        Returns:
-            str: None by default
-        """
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """
-        Returns the current user.
-
-        Args:
-            request: Flask request object.
-
-        Returns:
-            User: None by default
-        """
         return None
+
