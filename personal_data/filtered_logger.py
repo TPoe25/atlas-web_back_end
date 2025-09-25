@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-This module provides a logger that redacts sensitive PII data.
+This module provides a logger that redacts sensitive PII data,
+and a secure method to connect to a MySQL database using environment variables.
 """
 
-from ast import main
 import logging
 import re
 import os
@@ -35,17 +35,12 @@ def filter_datum(fields: List[str], redaction: str, message: str,
 
 class RedactingFormatter(logging.Formatter):
     """
+    Redacting Formatter class for logging, filtering out PII data.
+
     Attributes:
         REDACTION (str): The string used to replace sensitive information.
         FORMAT (str): The format string for log messages.
         SEPARATOR (str): The separator used to split log messages into fields.
-
-    Methods:
-        __init__(fields: List[str]):
-
-    format(record: logging.LogRecord) -> str:
-        Format a log record, redacting sensitive fields.
-    Redacting Formatter class for logging, filtering out PII data.
     """
 
     REDACTION = "***"
@@ -59,7 +54,7 @@ class RedactingFormatter(logging.Formatter):
         Args:
             fields (List[str]): The list of field names to redact.
         """
-        super(RedactingFormatter, self).__init__(self.FORMAT)
+        super().__init__(self.FORMAT)
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
@@ -88,7 +83,6 @@ def get_logger() -> logging.Logger:
     Returns:
         logging.Logger: Configured logger instance.
     """
-
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
     logger.propagate = False
@@ -103,7 +97,10 @@ def get_logger() -> logging.Logger:
 
 def get_db() -> Optional[MySQLConnection]:
     """
-    Return a connector to the MySQL database.
+    Return a connector to the MySQL database using environment variables.
+
+    Returns:
+        MySQLConnection | None: The database connection, or None on failure.
     """
     try:
         # Fetch credentials from environment variables
@@ -113,10 +110,7 @@ def get_db() -> Optional[MySQLConnection]:
         db_name: Optional[str] = os.getenv('PERSONAL_DATA_DB_NAME')
 
         if not db_name:
-            raise ValueError(
-                "Database name(PERSONAL_DATA_DB_NAME) \
-                must be set in environment variables"
-            )
+            raise ValueError("Environment variable PERSONAL_DATA_DB_NAME is required")
 
         # Establish the connection
         connection: MySQLConnection = mysql.connector.connect(
@@ -126,13 +120,23 @@ def get_db() -> Optional[MySQLConnection]:
             database=db_name
         )
 
-        if connection.is_connected():
-            print("Successfully connected to the database.")
         return connection
     except Error as e:
-        print(f"Error: {e}")
+        print(f"Database connection error: {e}")
         return None
 
 
-if __name__ == '__main__':
-    main()
+# Optional testing block
+if __name__ == "__main__":
+    # Test connection and logger output (can be removed or customized)
+    logger = get_logger()
+    logger.info("name=John Doe; email=john@example.com; ssn=123-45-6789;")
+
+    db = get_db()
+    if db:
+        cursor = db.cursor()
+        cursor.execute("SELECT COUNT(*) FROM users;")
+        for row in cursor:
+            print(f"User count: {row[0]}")
+        cursor.close()
+        db.close()
