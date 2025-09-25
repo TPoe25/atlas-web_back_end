@@ -7,10 +7,8 @@ from ast import main
 import logging
 import re
 import os
-import mysql
 import mysql.connector
-from mysql.connector import Error
-from mysql.connector.connection import MySQLConnection
+from mysql.connector import MySQLConnection, Error
 from typing import List, Tuple, Optional
 
 # Define PII fields that should be redacted in logs
