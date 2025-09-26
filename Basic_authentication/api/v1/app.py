@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+""" Flask app
+"""
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 from api.v1.views import app_views
