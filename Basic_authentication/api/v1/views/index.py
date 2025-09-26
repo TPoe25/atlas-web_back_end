@@ -2,13 +2,14 @@
 """ Index module """
 
 from flask import jsonify, abort
-from api.v1.views import app_views
+from . import app_views
 
-@app_views.route('/api/v1/status', methods=['GET'])
+@app_views.route('/status', methods=['GET'])
 def status():
+    """Status endpoint"""
     return jsonify({"status": "OK"})
 
-@app_views.route('/api/v1/unauthorized', methods=['GET'])
+@app_views.route('/unauthorized', methods=['GET'])
 def unauthorized():
-    """Endpoint that raises a 401 Unauthorized error"""
+    """Endpoint that aborts with 401"""
     abort(401)
