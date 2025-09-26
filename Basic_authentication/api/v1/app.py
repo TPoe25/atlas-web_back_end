@@ -1,11 +1,8 @@
-#!/usr/bin/env python3
-"""
-Route module for the API
-"""
 from flask import Flask, jsonify
+from flask_cors import CORS
 from api.v1.views import app_views
 from os import getenv
-from flask_cors import CORS
+from flask import abort  # (if needed later)
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -23,12 +20,11 @@ else:
 
 @app.errorhandler(401)
 def unauthorized(error):
-    """Handle unauthorized access"""
-    return jsonify({"error": "unauthorized"}), 401
+    return jsonify({"error": "Unauthorized"}), 401
 
 @app.errorhandler(403)
 def forbidden(error):
-    return jsonify({"error": "forbidden"}), 403
+    return jsonify({"error": "Forbidden"}), 403
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
