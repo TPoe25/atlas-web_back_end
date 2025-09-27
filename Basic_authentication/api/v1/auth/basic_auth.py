@@ -47,14 +47,19 @@ class BasicAuth(Auth):
 
         return authorization_header[len("Basic "):]
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: Optional[str]) -> (Optional[str], Optional[str]):
+    def extract_user_credentials(self,
+                                 decoded_base64_authorization_header:
+                                     Optional[str]) -> (Optional[str],
+                                                        Optional[str]):
         """
         Extract user credentials from the decoded Base64 authorization header
 
         Args:
-            decoded_base64_authorization_header (Optional[str]): The decoded Base64 header
+            decoded_base64_authorization_header (Optional[str]):
+            - The decoded Base64 header
         Returns:
-            (Optional[str], Optional[str]): A tuple containing the user email and password, or (None, None) if extraction fails
+            (Optional[str], Optional[str]):
+            - A tuple containing the user email and password, or None if fail.
         """
         if decoded_base64_authorization_header is None:
             return None, None
