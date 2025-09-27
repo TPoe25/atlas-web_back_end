@@ -22,16 +22,31 @@ if auth_type == "basic_auth":
 else:
     from api.v1.auth.auth import Auth
     auth = Auth()
+    """ Basic Auth class"""
 
+""" Unauthorized handler """
 @app.errorhandler(401)
 def unauthorized(error):
-    return jsonify({
+    return jsonify(
+        {
             "error": "Unauthorized"
         }), 401
 
+""" Forbidden handler """
 @app.errorhandler(403)
 def forbidden(error):
-    return jsonify({"error": "Forbidden"}), 403
+    return jsonify(
+        {
+            "error": "Forbidden"
+        }), 403
+
+""" Not found handler """
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify(
+        {
+            "error": "Not found"
+        }), 404
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
