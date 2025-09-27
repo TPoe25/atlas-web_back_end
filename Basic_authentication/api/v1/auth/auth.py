@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""
-Auth module for API authentication
+""" Auth module for API authentication
 """
 
 from flask import Request
 from typing import List, Optional, Any
-
 
 class Auth:
     """
@@ -56,7 +54,7 @@ class Auth:
 
         return request.headers.get('Authorization')
 
-    def current_user(self , request: None):
+    def current_user(self, request: Optional[Request] = None):
         """
         current user returns None
 
