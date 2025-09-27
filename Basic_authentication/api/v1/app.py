@@ -25,7 +25,9 @@ else:
 
 @app.errorhandler(401)
 def unauthorized(error):
-    return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({
+            "error": "Unauthorized"
+        }), 401
 
 @app.errorhandler(403)
 def forbidden(error):
