@@ -8,7 +8,9 @@ from flask import Request
 
 
 class Auth:
-    """Template for all authentication systems."""
+    """
+    Template for all authentication systems.
+    """
 
     def require_auth(self, path: Optional[str], excluded_paths: List[str]) -> bool:
         """
@@ -27,7 +29,9 @@ class Auth:
         if not excluded_paths:
             return True
 
-        """ Ensure trailing slash on path for slash-tolerant comparison """
+        """
+        Ensure trailing slash on path for slash-tolerant comparison
+        """
         if not path.endswith('/'):
             path += '/'
 
@@ -38,17 +42,20 @@ class Auth:
         return True
 
     def authorization_header(self, request: Optional[Request] = None) -> Optional[str]:
-        """ authorization header returns None
+        """
+        authorization header returns None
         """
         return None
 
     def current_user(self, request: Optional[Request] = None):
-        """ current user returns None
+        """
+        current user returns None
         """
         return None
 
     def unauthorized(self) -> bool:
-        """ unauthorized returns True
+        """
+        unauthorized returns True
         """
         return True
 
