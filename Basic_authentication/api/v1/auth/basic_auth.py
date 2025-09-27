@@ -7,11 +7,14 @@ import base64
 from typing import Optional
 from api.v1.auth.auth import Auth
 
+
 class BasicAuth(Auth):
     """
     Basic authentication class
     """
-    def decode_base64_authorization_header(self, base64_authorization_header: Optional[str]) -> Optional[str]:
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header:
+                                               Optional[str]) -> Optional[str]:
         """Decode the Base64 authorization header"""
         if base64_authorization_header is None:
             return None
@@ -23,7 +26,9 @@ class BasicAuth(Auth):
             return decoded_str
         except Exception:
             return None
-    def extract_base64_authorization_header(self, authorization_header: Optional[str]) -> Optional[str]:
+
+    def extract_base64_authorization_header(self, authorization_header:
+                                            Optional[str]) -> Optional[str]:
         """
         Extract the Base64 part from the authorization header
 
