@@ -16,7 +16,15 @@ class BasicAuth(Auth):
     def decode_base64_authorization_header(self,
                                            base64_authorization_header:
                                                Optional[str]) -> Optional[str]:
-        """Decode the Base64 authorization header"""
+        """
+        Decode the Base64 authorization header
+
+        Args:
+            base64_authorization_header (Optional[str]): The Base64 header
+
+        Returns:
+            Optional[str]: The decoded string or None
+        """
         if base64_authorization_header is None:
             return None
         if not isinstance(base64_authorization_header, str):
@@ -51,7 +59,7 @@ class BasicAuth(Auth):
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header:
                                      Optional[str]) -> (Optional[str],
-                                                        Optional[str]):
+                                                Optional[str]):
         """
         Extract user credentials from the decoded Base64 authorization header
 
@@ -73,7 +81,7 @@ class BasicAuth(Auth):
         return email, password
 
     def user_object_from_credentials(self, user_email: Optional[str],
-                                     user_pwd: Optional[str]) -> Optional[User]
+                                     user_pwd: Optional[str]) -> Optional[User]:
         """
         Returns the User instance based on his email and password
 
@@ -81,7 +89,7 @@ class BasicAuth(Auth):
             user_email (Optional[str]): The user email
             user_pwd (Optional[str]): The user password
 
-        returns:
+        returns:x'
             Optional[User]: The User instance or None
         """
         if user_email is None or not isinstance(user_email, str):
