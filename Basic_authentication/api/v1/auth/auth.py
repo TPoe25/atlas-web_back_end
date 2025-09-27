@@ -24,16 +24,14 @@ class Auth:
         if path is None:
             return True
 
-        if not excluded_paths:
+        if not excluded_paths or len(excluded_paths) == 0:
             return True
 
-        # Ensure trailing slash on path for slash-tolerant comparison
+        # normalize path to always end with a slash
         if not path.endswith('/'):
             path += '/'
 
         for excluded in excluded_paths:
-            if not excluded.endswith('/'):
-                excluded += '/'
             if excluded == path:
                 return False
 
