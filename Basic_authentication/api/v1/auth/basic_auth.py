@@ -73,7 +73,7 @@ class BasicAuth(Auth):
         return email, password
 
     def user_object_from_credentials(self, user_email: Optional[str],
-                                     user_pwd: Optional[str]) -> Optional[User]:
+                                     user_pwd: Optional[str]) -> Optional[User]
         """
         Returns the User instance based on his email and password
 
