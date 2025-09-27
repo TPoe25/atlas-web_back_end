@@ -2,8 +2,8 @@
 """ Main 0
 """
 from api.v1.auth.auth import Auth
-    """ Basic Auth class
-    """
+""" Basic Auth class
+"""
 
 a = Auth()
 """create auth instance"""
