@@ -3,8 +3,8 @@
 Auth module for API authentication
 """
 
-from typing import List, Optional
 from flask import Request
+from typing import List, Optional, Any
 
 
 class Auth:
@@ -41,21 +41,36 @@ class Auth:
 
         return True
 
-    def authorization_header(self, request: Optional[Request] = None) -> Optional[str]:
+    def authorization_header(self, request: Optional[Any] = None) -> Optional[str]:
         """
-        authorization header returns None
+        Retrieves the Authorization header from the request.
+
+        Args:
+            request: The Flask request object.
+
+        Returns:
+            str or None: The value of the Authorization header, or None if not present.
         """
-        return None
+        if request is None:
+            return None
+
+        return request.headers.get('Authorization')
 
     def current_user(self, request: Optional[Request] = None):
         """
         current user returns None
+
+        Args:
+            request: The Flask request object.
+        Returns:
+            None
         """
         return None
 
     def unauthorized(self) -> bool:
         """
         unauthorized returns True
+        Returns:
+            bool: Always True
         """
         return True
-
