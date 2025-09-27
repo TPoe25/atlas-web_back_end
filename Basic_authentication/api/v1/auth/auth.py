@@ -27,7 +27,7 @@ class Auth:
         if not excluded_paths:
             return True
 
-        # Ensure trailing slash on path for slash-tolerant comparison
+        """ Ensure trailing slash on path for slash-tolerant comparison """
         if not path.endswith('/'):
             path += '/'
 
@@ -44,4 +44,8 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """ current user returns None """
         return None
+
+    def unauthorized(self) -> bool:
+        """ unauthorized returns True """
+        return True
 
