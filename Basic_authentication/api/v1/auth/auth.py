@@ -38,8 +38,10 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
+        """ authorization header returns None """
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """ current user returns None """
         return None
 
