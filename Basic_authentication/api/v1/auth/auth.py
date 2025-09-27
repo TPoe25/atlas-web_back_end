@@ -3,14 +3,14 @@
 Auth module for API authentication
 """
 
-from flask import request
-from typing import List, TypeVar
+from typing import List, Optional
+from flask import Request
 
 
 class Auth:
     """Template for all authentication systems."""
 
-    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+    def require_auth(self, path: Optional[str], excluded_paths: List[str]) -> bool:
         """
         Determines if a path requires authentication.
 
@@ -37,11 +37,11 @@ class Auth:
 
         return True
 
-    def authorization_header(self, request=None) -> str:
+    def authorization_header(self, request: Optional[Request] = None) -> Optional[str]:
         """ authorization header returns None """
         return None
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request: Optional[Request] = None):
         """ current user returns None """
         return None
 
