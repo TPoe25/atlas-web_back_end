@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """ Main 0
 """
-from Basic_authentication.api.v1.auth.auth import Auth
+from api.v1.auth.auth import Auth
+    """ Basic Auth class
+    """
 
 a = Auth()
+"""create auth instance"""
 
 print(a.require_auth("/api/v1/status/", ["/api/v1/status/"]))
 print(a.authorization_header())
