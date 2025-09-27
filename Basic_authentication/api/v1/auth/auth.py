@@ -38,14 +38,17 @@ class Auth:
         return True
 
     def authorization_header(self, request: Optional[Request] = None) -> Optional[str]:
-        """ authorization header returns None """
+        """ authorization header returns None
+        """
         return None
 
     def current_user(self, request: Optional[Request] = None):
-        """ current user returns None """
+        """ current user returns None
+        """
         return None
 
     def unauthorized(self) -> bool:
-        """ unauthorized returns True """
+        """ unauthorized returns True
+        """
         return True
 
