@@ -21,6 +21,7 @@ if auth_type == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
 
+
 @app.before_request
 def before_request():
     """Before request handler to manage authentication"""
@@ -41,6 +42,7 @@ def before_request():
 
     if auth.current_user(request) is None:
         abort(403)
+
 
 # Error handlers for common HTTP errors
 @app.errorhandler(401)
