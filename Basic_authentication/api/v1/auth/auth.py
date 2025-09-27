@@ -4,19 +4,21 @@
 
 from typing import List, Optional
 
+
 class Auth:
     """
     Template for all authentication systems.
     It provies methods for handling API authentication.
     """
 
-    def require_auth(self, path: Optional[str], excluded_paths: List[str]) -> bool:
+    def require_auth(self, path: Optional[str],
+                     excluded_paths: List[str]) -> bool:
         """
         Determines if a path requires authentication.
 
         Args:
             path (str or None): The request path.
-            excluded_paths (list): List of paths that do not require authentication.
+            excluded_paths (list): Paths that don't require authentication.
 
         Returns:
             bool: True if authentication is required, False otherwise.
@@ -45,7 +47,7 @@ class Auth:
             request: The Flask request object.
 
         Returns:
-            str or None: The value of the Authorization header, or None if not present.
+            str or None: The value of the Authorization header, or None if not.
         """
         if request is None:
             return None
