@@ -2,6 +2,8 @@
 """ Auth module for API authentication
 """
 
+import os
+from flask import request
 from typing import List, Optional
 
 
@@ -73,3 +75,24 @@ class Auth:
             bool: Always True
         """
         return True
+
+    def session_cookie(self, request=None):
+        """
+        Retrieves the session cookie from the request.
+
+        Args:
+            request: The Flask request object.
+        Returns:
+            The value of the session cookie, or None if not found.
+        """
+        if request is None:
+            return None
+
+        # Get the session name from environment variable or use default
+        session_name = os.getenv('SESSION_NAME')
+        if session_name is None:
+            return None
+
+        # Return the value of the session cookie
+        return request.cookies.get(session_name)
+
