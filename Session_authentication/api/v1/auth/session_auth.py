@@ -60,6 +60,7 @@ class SessionAuth(Auth):
             return None
 
         # Get the session ID from the request cookie
+        session_id = self.session_cookie(request)
         if session_id is None:
             return None
 
@@ -69,4 +70,4 @@ class SessionAuth(Auth):
             return None
 
         # Get the user object using the user ID
-        return self.user.get(user_id)
+        return User.get(user_id)
