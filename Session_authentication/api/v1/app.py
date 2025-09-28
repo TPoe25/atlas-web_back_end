@@ -51,6 +51,7 @@ def before_request():
     if request.current_user is None:
         abort(403)
 
+
 # Error handlers for common HTTP errors
 @app.errorhandler(401)
 def unauthorized(error: HTTPException):
