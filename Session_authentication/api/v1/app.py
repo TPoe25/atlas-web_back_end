@@ -17,12 +17,15 @@ auth = None
 auth_type = getenv("AUTH_TYPE")
 
 # Determine the authentication type based on environment variable
-if auth_type == "auth":
-    from api.v1.auth.auth import Auth
-    auth = Auth()
-elif auth_type == "basic_auth":
+if auth_type == "basic_auth":
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
+elif auth_type == "session_auth":
+    from api.v1.auth.session_auth import SessionAuth
+    auth = SessionAuth()
+else:
+    from api.v1.auth.auth import Auth
+    auth = Auth()
 
 
 @app.before_request
