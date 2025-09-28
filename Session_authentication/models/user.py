@@ -3,10 +3,8 @@
 User module
 """
 
-from flask import jsonify, abort, request
 import hashlib
 from models.base import Base
-app_views = __import__('api.v1.views').app_views
 
 class User(Base):
     """
@@ -82,19 +80,3 @@ class User(Base):
             return "{}".format(self.last_name)
         else:
             return "{} {}".format(self.first_name, self.last_name)
-
-    @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
-    def get_user(user_id):
-        """
-        Retrieve a User object by id or 'me'
-        """
-        if user_id == 'me':
-            user = getattr(request, 'current_user', None)
-            if user is None:
-                abort(404)
-            return jsonify(user.to_dict()), 200
-
-        user = User.get(user_id)
-        if user is None:
-            abort(404)
-        return jsonify(user.to_dict()), 200

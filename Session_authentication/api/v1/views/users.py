@@ -136,3 +136,23 @@ def update_user(user_id: str) -> ResponseReturnValue:
 
     user.save()
     return jsonify(user.to_json()), 200
+
+@app_views.route('/users/<user_id>/', methods=['GET'], strict_slashes=False)
+def get_user(user_id):
+    """
+    Get a user by ID.
+
+    Args:
+        user_id (str): The ID of the user to retrieve.
+
+    """
+    if user_id == 'me':
+       user = getattr(request, 'current_user', None)
+       if user is None:
+           abort(404)
+       return jsonify(user.to_json())
+
+    user = User.get(user_id)
+    if user is None:
+        abort(404)
+    return jsonify(user.to_json()), 200
