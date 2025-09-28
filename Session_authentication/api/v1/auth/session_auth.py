@@ -3,7 +3,6 @@
 Session authentication module
 """
 
-from api.v1.auth.session_auth import SessionAuth
 from api.v1.auth.auth import Auth
 from models.user import User
 import uuid
