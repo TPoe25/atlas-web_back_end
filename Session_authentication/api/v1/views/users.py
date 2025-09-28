@@ -17,26 +17,6 @@ def view_all_users() -> ResponseReturnValue:
     all_users: List[Dict] = [user.to_json() for user in User.all()]
     return jsonify(all_users)
 
-
-@app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
-def view_one_user(user_id: str) -> ResponseReturnValue:
-    """Retrieve a specific user by ID.
-
-    Args:
-        user_id: The ID of the user to retrieve
-
-    Returns:
-        JSON response with user data
-        404 if user not found
-    """
-    if not user_id:
-        abort(404)
-    user = User.get(user_id)
-    if user is None:
-        abort(404)
-    return jsonify(user.to_json())
-
-
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id: str) -> ResponseReturnValue:
     """Delete a user by ID.
@@ -155,4 +135,4 @@ def get_user(user_id):
     user = User.get(user_id)
     if user is None:
         abort(404)
-    return jsonify(user.to_json()), 200
+    return jsonify(user.to_json())
