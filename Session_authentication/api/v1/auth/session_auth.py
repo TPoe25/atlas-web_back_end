@@ -3,6 +3,7 @@
 Session authentication module
 """
 
+from api.v1.auth.session_auth import SessionAuth
 from api.v1.auth.auth import Auth
 from models.user import User
 import uuid
@@ -71,3 +72,32 @@ class SessionAuth(Auth):
 
         # Get the user object using the user ID
         return User.get(user_id)
+
+    def destroy_session(self, request=None):
+        """
+        Destroy the session associated with the request
+        Args:
+            request: The HTTP request object
+        Returns:
+            bool: True if session was successfully destroyed, False otherwise
+        """
+        if request is None:
+            return False
+
+        # Get the session ID from the request cookie
+        session_id = self.session_cookie(request)
+        if session_id is None:
+            return False
+
+        # Find the user ID associated with the session ID
+        user_id = self.user_id_for_session_id(session_id)
+        if user_id is None:
+            return False
+
+        # Remove the session ID to user ID mapping
+        try:
+            del self.user_id_by_session_id[session_id]
+        except KeyError:
+            return False
+
+        return True
