@@ -95,4 +95,3 @@ class Auth:
 
         # Return the value of the session cookie
         return request.cookies.get(session_name)
-
