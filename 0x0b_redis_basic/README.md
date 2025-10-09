@@ -2,3 +2,4 @@
 
 Project about Redis and how to use it
 Checking if problem is fixed
+adjusting:
