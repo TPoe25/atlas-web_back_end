@@ -3,16 +3,16 @@
 Exercise 0: Redis basics
 """
 
-import redis
+import redis, uuid
 from typing import Union, Optional, Callable, Any
 
 class Cache:
     """Cache class to interact with Redis"""
 
-    def ___init___(self):
+    def __init__(self):
         """Initalize the Cache class"""
         self._redis = redis.Redis()
-        self._redis.flush(db)
+        self._redis.flushdb()
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
@@ -23,8 +23,7 @@ class Cache:
         Returns:
             str: The key under which the data is stored
         """
-        key = self._redis.randomkey()
-        key = f"data:{self._redis.incr('data_counter')}"
+        key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
 
@@ -54,8 +53,7 @@ class Cache:
         Returns:
             Optional[str]: The retrieved string, or None if not found
         """
-        value = self.get(key, lambda d: d.decode("utf-8"))
-        return value
+        return self.get(key, lambda d: d.decode("utf-8"))
 
     def get_int(self, key: str) -> Optional[int]:
         """
@@ -66,5 +64,4 @@ class Cache:
         Returns:
             Optional[int]: The retrieved integer, or None if not found
         """
-        value = self.get(key, int)
-        return value
+        return self.get(key, int)
