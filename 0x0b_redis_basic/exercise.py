@@ -4,7 +4,7 @@ Exercise 0: Redis basics
 """
 
 import redis
-from typing import Union
+from typing import Union, Optional, Callable, Any
 
 
 class Cache:
@@ -26,7 +26,6 @@ class Cache:
         Returns:
             str: The key under which the data is stored
         """
-        key = self._redis.randomkey()
         key = f"data:{self._redis.incr('data_counter')}"
         self._redis.set(key, data)
         return key
@@ -41,7 +40,7 @@ class Cache:
         Returns:
             Any: The retrieved data, possibly converted by fn
         """
-       value = self._redis.get(key)
+        value = self._redis.get(key)
         if value is None:
             return None
         if fn is not None:
