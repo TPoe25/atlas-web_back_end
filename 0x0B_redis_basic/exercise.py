@@ -4,7 +4,8 @@ Exercise 0: Redis basics
 """
 
 import redis, uuid
-from typing import Union, Optional, Callable, Any
+from typing, import Union, Optional, Callable, Any,
+
 
 class Cache:
     """Cache class to interact with Redis"""
