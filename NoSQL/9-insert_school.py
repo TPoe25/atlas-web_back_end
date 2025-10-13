@@ -3,20 +3,20 @@
 from typing import Any
 from pymongo.collection import Collection
 
+"""Insert a school into a MongoDB collection."""
+
+from typing import Any
+from pymongo.collection import Collection
+
 def insert_school(mongo_collection: Collection, **kwargs) -> Any:
-    """
-    Insert a new school into the given MongoDB collection.
+    """Insert a new school into the given MongoDB collection.
 
     Args:
-        mongo_collection (pymongo.collection.Collection): The PyMongo collection
-
-        kwargs: Additional keyword arguments for the school document
+        mongo_collection (Collection): The PyMongo collection object.
+        **kwargs: Arbitrary key-value pairs for the school document.
 
     Returns:
-        Any: The inserted school document
+        Any: The _id of the newly inserted document.
     """
-
-    # Insert the school document into the collection and return the inserted ID
     result = mongo_collection.insert_one(kwargs)
-    # Return the _id of the inserted document
     return result.inserted_id
