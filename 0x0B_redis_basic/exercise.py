@@ -13,14 +13,35 @@ def count_calls(method: Callable) -> Callable:
     """
     Decorator that counts how many times a method is called.
     """
-
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """Wrapper function that increments Redis counter and calls method"""
-        key = method.__qualname__  # e.g., "Cache.store"
-        self._redis.incr(key)      # increment counter in Redis
+        key = method.__qualname__
+        self._redis.incr(key)
         return method(self, *args, **kwargs)
 
+    return wrapper
+
+
+def call_history(method: Callable) -> Callable:
+    """Decorator that stores teh history of inputs and outputs"""
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        # create keys for inputs and outputs
+        input_key = f"{method.__qualname__}:inputs"
+        output_key = f"{method.__qualname__}:outputs"
+
+        # store input args
+        self._redis.rpush(input_key, str(args))
+
+        # call the actual methond to get its result
+        result = method(self, *args, **kwargs)
+
+        # Store output result
+        self._redis.rpush(output_key, str(result))
+
+        # Return the actual result
+        return result
     return wrapper
 
 
@@ -84,3 +105,30 @@ class Cache:
             Optional[int]: The retrieved integer, or None if not found
         """
         return self.get(key, int)
+
+def replay(method: Callable):
+    """
+    Display the history of calls of a particular function.
+
+    Example:
+        >>> cache = Cache()
+        >>> cache.store("foo")
+        >>> cache.store("bar")
+        >>> replay(cache.store)
+        Cache.store was called 2 times:
+        Cache.store(*('foo',)) -> <uuid>
+        Cache.store(*('bar',)) -> <uuid>
+
+    """
+    redis_instance = method.__self__._redis
+    method_name = method.__qualname__
+
+    # Retrieve stored inputs and outputs
+    inputs = redis_instance.lrange(f"{method_name}:inputs", 0, -1)
+    outputs = redis_instance.lrange(f"{method_name}:outputs", 0, -1)
+
+    call_count = len(inputs)
+    print(f"{method_name} was called {call_count} times:")
+
+    for input_data, output_data in zip(inputs, outputs):
+        print(f"{method_name}(*{input_data.decode('utf-8')}) -> {output_data.decode('utf-8')}")
