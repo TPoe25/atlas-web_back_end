@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 9-insert school """
+""" insert_school module to insert a school into a MongoDB collection."""
 from typing import Any
 from pymongo.collection import Collection
 
@@ -9,6 +9,7 @@ def insert_school(mongo_collection: Collection, **kwargs) -> Any:
 
     Args:
         mongo_collection (pymongo.collection.Collection): The PyMongo collection
+
         kwargs: Additional keyword arguments for the school document
     Returns:
         Any: The inserted school document
