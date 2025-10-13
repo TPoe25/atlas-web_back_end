@@ -109,26 +109,19 @@ class Cache:
 
 
 def replay(method: Callable) -> None:
-    """
-    Display the history of calls of a particular function.
-
-    Example:
-        >>> cache = Cache()
-        >>> cache.store("foo")
-        >>> cache.store("bar")
-        >>> replay(cache.store)
-        Cache.store was called 2 times:
-        Cache.store(*('foo',)) -> <uuid>
-        Cache.store(*('bar',)) -> <uuid>
-
-    """
-    redis_instance = method.__self__._redis
+    """Display the history of calls for a particular function."""
+    r = redis.Redis()
     method_name = method.__qualname__
+    input_key = f"{method_name}:inputs"
+    output_key = f"{method_name}:outputs"
 
-    inputs = redis_instance.lrange(f"{method_name}:inputs", 0, -1)
-    outputs = redis_instance.lrange(f"{method_name}:outputs", 0, -1)
+    inputs = r.lrange(input_key, 0, -1)
+    outputs = r.lrange(output_key, 0, -1)
 
     print(f"{method_name} was called {len(inputs)} times:")
+
     for input_data, output_data in zip(inputs, outputs):
-        print(f"{method_name}(*{input_data.decode
-              ('utf-8')}) -> {output_data.decode('utf-8')}")
+        # decodes bythes to strings properly
+        input_str = input_data.decode('utf-8')
+        output_str = output_data.decode('utf-8')
+        print(f"{method_name}(*({input_str},)) -> {output_str}")
