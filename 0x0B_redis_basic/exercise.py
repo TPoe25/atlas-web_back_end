@@ -124,4 +124,4 @@ def replay(method: Callable):
         # Convert bytes to strings for readable output
         inp_str = inp.decode("utf-8")
         out_str = out.decode("utf-8")
-        print(f"{method_name}(*({inp_str},)) -> {out_str}")
+        print(f"{method_name}(*{inp_str}) -> {out_str}")
