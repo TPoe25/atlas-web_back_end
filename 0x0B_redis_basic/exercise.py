@@ -3,8 +3,25 @@
 Exercise 0: Redis basics
 """
 
-import redis, uuid
-from typing, import Union, Optional, Callable, Any,
+import redis
+import uuid
+from typing import Union, Optional, Callable, Any
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    """
+    Decorator that counts how many times a method is called.
+    """
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """Wrapper function that increments Redis counter and calls method"""
+        key = method.__qualname__  # e.g., "Cache.store"
+        self._redis.incr(key)      # increment counter in Redis
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Cache:
@@ -15,6 +32,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         Store data in Redis and return the key
@@ -30,11 +48,11 @@ class Cache:
 
     def get(self, key: str, fn: Optional[Callable] = None) -> Any:
         """
-        Retrieve data from Redis by key and optionally apply a conversion function
+        Retrieve data from Redis by key, optionally applys conversion function
 
         Args:
             key (str): The key to look up in Redis
-            fn (Optional[Callable]): A function to convert the data before returning
+            fn (Optional[Callable]): Function to convert data before returning
         Returns:
             Any: The retrieved data, possibly converted by fn
         """
