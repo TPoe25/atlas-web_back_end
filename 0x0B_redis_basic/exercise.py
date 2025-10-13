@@ -107,6 +107,7 @@ class Cache:
         """
         return self.get(key, int)
 
+
 def replay(method: Callable):
     """Display the history of calls of a particular function."""
     r = redis.Redis()
