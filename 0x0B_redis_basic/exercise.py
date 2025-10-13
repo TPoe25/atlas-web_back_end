@@ -107,21 +107,20 @@ class Cache:
         """
         return self.get(key, int)
 
-
-def replay(method: Callable) -> None:
-    """Display the history of calls for a particular function."""
+def replay(method: Callable):
+    """Display the history of calls of a particular function."""
     r = redis.Redis()
     method_name = method.__qualname__
-    input_key = f"{method_name}:inputs"
-    output_key = f"{method_name}:outputs"
+    inputs_key = f"{method_name}:inputs"
+    outputs_key = f"{method_name}:outputs"
 
-    inputs = r.lrange(input_key, 0, -1)
-    outputs = r.lrange(output_key, 0, -1)
+    inputs = r.lrange(inputs_key, 0, -1)
+    outputs = r.lrange(outputs_key, 0, -1)
 
     print(f"{method_name} was called {len(inputs)} times:")
 
-    for input_data, output_data in zip(inputs, outputs):
-        # decodes bythes to strings properly
-        input_str = input_data.decode('utf-8')
-        output_str = output_data.decode('utf-8')
-        print(f"{method_name}(*({input_str},)) -> {output_str}")
+    for inp, out in zip(inputs, outputs):
+        # Convert bytes to strings for readable output
+        inp_str = inp.decode("utf-8")
+        out_str = out.decode("utf-8")
+        print(f"{method_name}(*({inp_str},)) -> {out_str}")
