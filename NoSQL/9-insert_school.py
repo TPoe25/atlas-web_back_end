@@ -14,6 +14,7 @@ def insert_school(mongo_collection: Collection, **kwargs) -> Any:
     Args:
         mongo_collection (Collection): The PyMongo collection object.
         **kwargs: Arbitrary key-value pairs for the school document.
+        Any: The _id of the newly inserted document.
 
     Returns:
         Any: The _id of the newly inserted document.
