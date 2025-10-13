@@ -53,6 +53,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
@@ -106,7 +107,8 @@ class Cache:
         """
         return self.get(key, int)
 
-def replay(method: Callable):
+
+def replay(method: Callable) -> None:
     """
     Display the history of calls of a particular function.
 
@@ -123,12 +125,10 @@ def replay(method: Callable):
     redis_instance = method.__self__._redis
     method_name = method.__qualname__
 
-    # Retrieve stored inputs and outputs
     inputs = redis_instance.lrange(f"{method_name}:inputs", 0, -1)
     outputs = redis_instance.lrange(f"{method_name}:outputs", 0, -1)
 
-    call_count = len(inputs)
-    print(f"{method_name} was called {call_count} times:")
-
+    print(f"{method_name} was called {len(inputs)} times:")
     for input_data, output_data in zip(inputs, outputs):
-        print(f"{method_name}(*{input_data.decode('utf-8')}) -> {output_data.decode('utf-8')}")
+        print(f"{method_name}(*{input_data.decode
+              ('utf-8')}) -> {output_data.decode('utf-8')}")
