@@ -11,6 +11,7 @@ def insert_school(mongo_collection: Collection, **kwargs) -> Any:
         mongo_collection (pymongo.collection.Collection): The PyMongo collection
 
         kwargs: Additional keyword arguments for the school document
+
     Returns:
         Any: The inserted school document
     """
