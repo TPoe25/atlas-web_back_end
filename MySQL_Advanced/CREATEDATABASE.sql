@@ -1,0 +1,3 @@
+CREATE DATABASE hbtn_0c_0;
+SHOW DATABASES;
+USE hbtn_0c_0;
