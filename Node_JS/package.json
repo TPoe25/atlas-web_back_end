@@ -1,0 +1,35 @@
+{
+  "name": "node_js_basics",
+  "version": "1.0.0",
+  "description": "How to run js using Node JS, and NodeJS modules.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint",
+    "check-lint": "lint [0-9]*.js",
+    "test": "./node_modules/mocha/bin/mocha --require babel-register --exit",
+    "dev": "nodemon --exec babel-node --presets babel-preset-env ./server.js ./database.csv"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^0.0.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.3.7",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.7.0",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.0",
+    "sinon": "^7.5.0"
+  },
+  "keywords": [],
+  "type": "commonjs"
+}
