@@ -12,7 +12,7 @@ describe('calculateNumber', () => {
         assert.strictEqual(calculateNumber(1, 3.7), 5);
     });
 
-   it('should round second number up and return 5 for (1.2, 3.7)', () => {
+   it('should round both number up and return 5 for (1.2, 3.7)', () => {
         assert.strictEqual(calculateNumber(1.2, 3.7), 5);
     });
 
