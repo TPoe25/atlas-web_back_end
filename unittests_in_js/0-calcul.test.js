@@ -1,5 +1,6 @@
 // 0-calcul.test.js
 // using Node's built-in 'assert' module for testing
+
 const assert = require('assert');
 const calculateNumber = require('./0-calcul');
 
