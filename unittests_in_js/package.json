@@ -4,7 +4,7 @@
   "description": "Unit tests project for Node.js",
   "main": "0-calcul.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha './*.test.js'"
   },
   "keywords": [],
   "author": "",
