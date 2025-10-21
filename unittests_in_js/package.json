@@ -1,23 +1,17 @@
 {
   "name": "unittests_in_js",
   "version": "1.0.0",
-  "description": "creating tests for files",
+  "description": "Unit tests for JS files using assert",
   "main": "0-calcul.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha './å*.test.js'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^1.12.2",
-    "chai": "^6.2.0",
-    "express": "^5.1.0",
     "mocha": "^11.7.4",
-    "request": "^2.88.2",
+    "chai": "^6.2.0",
     "sinon": "^21.0.0"
-  },
-  "dependencies": {
-    "uuid": "^13.0.0"
   }
 }
