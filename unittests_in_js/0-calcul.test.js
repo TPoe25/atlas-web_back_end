@@ -5,11 +5,11 @@ const assert = require('assert');
 const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', () => {
-    it('should return 4 when given (1, 3)', () => {
+    it('should return 4 when given (a, b)', () => {
         assert.strictEqual(calculateNumber(1, 3), 4);
     });
 
-    it('should round second number up and return 5 for (1, 3.7)', () => {
+    it('should round second number up and return 5 for (a, b)', () => {
         assert.strictEqual(calculateNumber(1, 3.7), 5);
     });
 
