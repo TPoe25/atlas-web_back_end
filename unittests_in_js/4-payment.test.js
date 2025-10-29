@@ -11,7 +11,7 @@ describe("sendPaymentRequestToApi with stub", () => {
 
     beforeEach(() => {
         // the calculateNumber function is stubbed to return 10
-        stub = sinon.stub(Utils, "calculateNumber").returns(10);
+        stub = sinon.stub(Utils, 'calculateNumber').returns(10);
         consoleSpy = sinon.spy(console, "log");
     });
 
