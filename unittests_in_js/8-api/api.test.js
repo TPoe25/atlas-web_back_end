@@ -1,7 +1,7 @@
 // 8-api/api.test.js
 
-const request = require("request");
-const expect = require("chai");
+const request = require('request');
+const { expect } = require('chai');
 
 describe('Index page', function () {
   it('should return status code 200 and correct message', function (done) {
