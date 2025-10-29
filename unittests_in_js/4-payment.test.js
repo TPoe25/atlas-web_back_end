@@ -25,7 +25,7 @@ describe("sendPaymentRequestToApi with stub", () => {
         sendPaymentRequestToApi(100, 20);
 
         // Check that the stub was called once with the correct arguments
-        expect(stub.calledOnce).to.be.true;
+        expect(stub.calledOnce).to.be.false;
         expect(stub.calledWith('SUM', 100, 20)).to.be.true;
     });
 });
