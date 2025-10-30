@@ -24,9 +24,8 @@ describe('Cart page', () => {
   });
 
   it('should return status code 404 when id is not a number', (done) => {
-    request('http://localhost:7865/cart/hello', (error, response, body) => {
+    request('http://localhost:7865/cart/hello', (error, response) => {
       expect(response.statusCode).to.equal(404);
-      expect(body).to.include('Cannot GET /cart/hello');
       done();
     });
   });

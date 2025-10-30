@@ -3,7 +3,6 @@
 
 const express = require('express');
 const app = express();
-const port = 7865;
 
 // Define the index route
 app.get('/', (req, res) => {
@@ -12,19 +11,15 @@ app.get('/', (req, res) => {
 
 // Define the cart route
 app.get('/cart/:id', (req, res) => {
-  const id = req.params.id;
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send(`Cannot GET /cart/${id}`);
-    }
-
-    res.send(`Payment methods for cart ${id}`);
+  const { id } = req.params.id;
+  res.send(`Payment methods for cart ${id}`);
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`API available on localhost port ${port}`);
-});
+if (require.main === module) {
+  app.listen(7865, () => {
+    console.log('API available on localhost port 7865');
+  });
+}
 
 // Export the app for testing purposes
 module.exports = app;
