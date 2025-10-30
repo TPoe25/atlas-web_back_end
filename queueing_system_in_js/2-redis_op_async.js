@@ -2,9 +2,8 @@
 // 2-redis_op_async.js
 // Async operations using Promises with Redis
 
-import pkg from 'redis';
-import { promisify } from 'util';
-const { createClient } = pkg;
+import { createClient } from 'redis';
+const util = require('util');
 
 // Create client
 const client = createClient();
@@ -17,9 +16,9 @@ client.on('connect', () => {
   console.log('Redis client connected to the server');
 });
 
-await client.connect();
+client.connect();
 
-const getAsync = promisify(client.get).bind(client);
+const getAsync = util.promisify(client.get).bind(client);
 
 async function setNewSchool(schoolName, value) {
   client.set(schoolName, value, (err, reply) => {
@@ -41,10 +40,14 @@ async function displaySchoolValue(schoolName) {
   }
 }
 
+(async () => {
 // Example usage
 await displaySchoolValue('Holberton');
 setNewSchool('HolbertonSanFrancisco', '100');
 await displaySchoolValue('HolbertonSanFrancisco');
+})();
 
+(async () => {
 // Close the client
 await client.quit();
+})();

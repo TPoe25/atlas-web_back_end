@@ -11,8 +11,8 @@ app.get('/', (req, res) => {
 
 // Define the cart route
 app.get('/cart/:id', (req, res) => {
-  const { id } = req.params.id;
-  res.send(`Payment methods for cart ${id}`);
+  // const id = req.params.id;
+  res.send(`Payment methods for cart ${req.params.id}`);
 });
 
 if (require.main === module) {

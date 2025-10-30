@@ -2,8 +2,7 @@
 // 5-publisher.js
 // Async operations using Promises with Redis
 
-import pkg from 'redis';
-const { createClient } = pkg;
+import { createClient } from 'redis';
 
 // Create publisher client
 const publisher = createClient();
@@ -16,7 +15,7 @@ publisher.on('connect', () => {
   console.log('Redis client connected to the server');
 });
 
-await publisher.connect();
+publisher.connect();
 
 const CHANNEL = 'holberton school channel';
 

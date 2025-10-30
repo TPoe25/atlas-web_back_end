@@ -2,8 +2,7 @@
 // 4-redis_advanced_op.js
 // Async operations using Promises with Redis
 
-import pkg from "redis";
-const { createClient } = pkg;
+import { createClient } from "redis";
 
 // Create client
 const client = createClient();
@@ -16,9 +15,9 @@ client.on("connect", () => {
   console.log("Redis client connected to the server");
 });
 
-await client.connect();
+client.connect();
 
-await client.del("HolbertonSchools");
+client.del("HolbertonSchools");
 
 // Function to print a message and result
 function print(reply) {
