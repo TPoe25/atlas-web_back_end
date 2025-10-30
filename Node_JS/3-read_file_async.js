@@ -1,40 +1,46 @@
-const fs = require('fs').promises;
+// 3-read_file_async.js
 
+const fs = require("fs").promises;
+
+// Read and count students from a CSV file asynchronously
 function countStudents(path) {
-    return fs.readFile(path, 'utf8')
-       .then(data => {
-            // Remove header and empty lines from data
-            const lines = data.split('\n').filter(line => line.trim()!== '');
-            if (lines.length === 0) {
-                console.log('Nummber of students: 0');
-                return;
-            }
+  return fs
+    .readFile(path, "utf8")
+    .then((data) => {
+      const lines = data.split("\n").filter((line) => line.trim() !== "");
+      if (lines.length <= 1) {
+        console.log("Number of students: 0");
+        return {};
+      }
 
-            const students = lines.slice(1);
-            console.log(`Number of students: ${students.length}`);
+      // Extract header and student records
+      const students = lines.slice(1);
+      console.log(`Number of students: ${students.length}`);
 
-            // Group students by field
-            const studentsByField = {};
+      const studentsByField = {};
 
-            // Process each student record
-            students.forEach(line => {
-        const record = line.split(',');
-        if (record.length < 4) return; // skip invalid lines
-        const firstName = record[0].trim();
-        const field = record[3].trim();
-
-        if (!studentsByField[field]) {
-          studentsByField[field] = [];
-        }
-        studentsByField[field].push(firstName);
+      // Group students by field of study
+      students.forEach((line) => {
+        const [firstName, , , field] = line.split(",");
+        if (!field || !firstName) return;
+        if (!studentsByField[field]) studentsByField[field] = [];
+        studentsByField[field].push(firstName.trim());
       });
 
+      // Print number of students in each field and their names
       for (const [field, names] of Object.entries(studentsByField)) {
-        console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
+        console.log(
+          `Number of students in ${field}: ${names.length}. List: ${names.join(
+            ", "
+          )}`
+        );
       }
+
+      // Return the grouped students by field
+      return studentsByField;
     })
     .catch(() => {
-      throw new Error('Cannot load the database');
+      throw new Error("Cannot load the database");
     });
 }
 
