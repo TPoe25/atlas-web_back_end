@@ -16,7 +16,7 @@ app.get("/cart/:id", (req, res) => {
 });
 
 // Returns payment methods
-app.get("/available_payments", (req, res) => {
+app.get('/available_payments', (req, res) => {
   res.json({
     payment_methods: {
       credit_cards: true,
@@ -26,9 +26,10 @@ app.get("/available_payments", (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    // const userName = req.body.userName;
-    console.log(`testing ${req.body}`);
-    res.send(`Welcome ${req.body.userName}`);
+    res.json
+    const userName = req.body.userName;
+    // console.log(`testing ${req.body}`);
+    res.json(`Welcome ${req.body.userName}`);
 });
 
 if (require.main === module) {
